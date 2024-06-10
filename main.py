@@ -10,7 +10,7 @@ from direct.gui.DirectLabel import DirectLabel
 from direct.showbase import DirectObject
 
 from panda3d.core import DepthOffsetAttrib, CullFaceAttrib
-
+from panda3d.core import WindowProperties
 # self written but public
 from panda_object_create import panda_object_create_load
 from panda_collisions import panda_collisions#CollisionWrapper
@@ -623,6 +623,9 @@ class MyEditor:
 class Wrapper:
     def __init__(self):
         self.b = ShowBase()
+        props = WindowProperties( )
+        props.setTitle('3d editor')
+        self.b.win.requestProperties( props )
         self.editor = MyEditor(self.b)
         self.collisions = panda_collisions.CollisionWrapper()
         self.collisions.setup_mouse_ray()
@@ -639,6 +642,8 @@ class Wrapper:
                         "a":"a"}
         
         self.create_move_task()
+        
+        
         
     def pass_on(self,action):
         if action not in self.inputs:
